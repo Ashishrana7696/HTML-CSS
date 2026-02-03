@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💖</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Dancing Script', cursive;
+    overflow: hidden;
+  }
+
+  /* ❤️ Floating hearts (used in Page 2) */
+  .heart {
+    position: absolute;
+    color: #ff4d6d;
+    animation: floatUp 4s linear infinite;
+    opacity: 0.8;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-120px) scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  /* ---------- PAGE 1 (UPDATED) ---------- */
+  .page1 {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("https://raw.githubusercontent.com/Ashishrana7696/HTML-CSS/master/WhatsApp%20Image%202026-02-03%20at%209.34.26%20PM.jpeg");
+    background-size: contain;
+    background-position: top center;
+    background-repeat: repeat;
+    background-color: #000;
+    position: relative;
+  }
+
+  .page1::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.9);
+    padding: 45px;
+    border-radius: 25px;
+    text-align: center;
+    width: 340px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  }
+
+  .card h2 {
+    font-family: 'Pacifico', cursive;
+    color: #ff4d6d;
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  .card h1 {
+    color: #ff4d6d;
+    font-size: 26px;
+    margin-bottom: 30px;
+  }
+
+  .btn {
+    padding: 12px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Pacifico', cursive;
+    transition: 0.3s;
+  }
+
+  #yesBtn {
+    background: linear-gradient(135deg, #ff4d6d, #ff7eb3);
+    color: white;
+    box-shadow: 0 8px 20px rgba(255,77,109,0.5);
+  }
+
+  #yesBtn:hover {
+    transform: scale(1.1);
+  }
+
+  #noBtn {
+    background: #eee;
+    color: #333;
+    position: absolute;
+    top: 240px;
+    left: 190px;
+  }
+
+  /* ---------- PAGE 2 (UNCHANGED) ---------- */
+  .page2 {
+    display: none;
+    height: 100vh;
+    position: relative;
+    background-image: url("https://raw.githubusercontent.com/Ashishrana7696/HTML-CSS/master/WhatsApp%20Image%202026-02-03%20at%209.13.01%20PM.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .message-box {
+    position: absolute;
+    right: 6%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.85);
+    padding: 35px 40px;
+    border-radius: 25px;
+    text-align: center;
+    width: 340px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    border: 4px solid #ff4d6d;
+  }
+
+  .message-box h2 {
+    font-family: 'Pacifico', cursive;
+    color: #ff4d6d;
+    font-size: 30px;
+  }
+
+  .message-box p {
+    font-family: 'Pacifico', cursive;
+    font-size: 20px;
+    color: #333;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page1" id="page1">
+  <div class="card">
+    <h2>Hey beautiful girl 💕</h2>
+    <h1>Will you be my Valentine?</h1>
+    <button class="btn" id="yesBtn">Yes 💖</button>
+    <button class="btn" id="noBtn">No 💔</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page2" id="page2">
+  <div class="message-box">
+    <h2>Best decision ever 😍💖</h2>
+    <p>Let’s be Valentines forever 💕💞</p>
+  </div>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="https://raw.githubusercontent.com/Ashishrana7696/HTML-CSS/master/Dekho%20Na%20Dekho%20Na%20Zulfon%20Se-(SambalpuriStar.In).mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+document.getElementById("yesBtn").onclick = () => {
+  document.getElementById("page1").style.display = "none";
+  document.getElementById("page2").style.display = "block";
+
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.7; // optional, adjust volume
+  music.play();       // starts music automatically
+};
+
+  const noBtn = document.getElementById("noBtn");
+  const page1 = document.getElementById("page1");
+  const page2 = document.getElementById("page2");
+
+  // NO button escape
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * 200;
+    const y = Math.random() * 200;
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  });
+
+  // Switch pages
+  document.getElementById("yesBtn").addEventListener("click", () => {
+    page1.style.display = "none";
+    page2.style.display = "block";
+    createHearts();
+  });
+
+  // Heart popping animation (same as original first code)
+  function createHearts() {
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.bottom = "0px";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }, 400);
+  }
+</script>
+
+</body>
+</html>
